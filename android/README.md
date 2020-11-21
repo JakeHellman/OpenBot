@@ -1,23 +1,40 @@
 # Android App
 
+<p align="center">
+  <span>English</span> |
+  <a href="README_CN.md">简体中文</a>
+</p>
+
 Our application is derived from the [TensorFlow Lite Object Detection Android Demo](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/android). We add a data logger and support for game controllers to collect datasets with the robot. Currently, we record readings from following sensors: camera, gyroscope, accelerometer, magnetometer, ambient light sensor, and barometer. Using the Android API, we are able to obtain the following sensor readings: RGB images, angular speed, linear acceleration, gravity, magnetic field strength, light intensity, atmospheric pressure, latitude, longitude, altitude, bearing, and speed. In addition to the phone sensors, we also record body sensor readings (wheel odometry, obstacle distance and battery voltage), which are transmitted via the serial link. Lastly, we record control commands received from a connected game controller, if present. We also integrate several neural networks for person following and autonomous navigation.
+
+## DISCLAIMERS
+
+1. **Safety:** Always make sure you operate in a safe environment. Keep in mind, that your phone could be damaged in a collision! Special care is neccessary when using automated control (e.g. person following or driving policy). Make sure you always have a game controller connected and are familiar with the key mapping so you can stop the vehicle at any time. Use at your own risk!
+2. **App under development:** The application is under development and may crash or exhibit unexpected behaviour depending on your phone model and version of the operating system. Make sure to test all functionalities with no wheels connected. Use at your own risk!
 
 ## Getting Started
 
 ### Prerequisites
 
-- Setup [Android Studio](https://developer.android.com/studio/index.html)
+- [Android Studio 3.2 or later](https://developer.android.com/studio/index.html) for building and installing the apk, or otherwise download the apk from the assets of the [latest release](https://github.com/intel-isl/OpenBot/releases/latest).
 - Android device and Android development environment with minimum API 21
-- Android Studio 3.2 or later
+- Currently, we use API 28 as compile and target SDK. It should get installed automatically, but if not you can install the SDK manually. Go to Android Studio -> Preferences -> Appearance & Behaviour -> System Settings -> Android SDK. Make sure API 28 is checked and click apply.
+
+![Android SDK](../docs/images/android_studio_sdk.jpg)
 
 ### Building
 
-- Open Android Studio and select *Open an existing Android Studio project*.
-- Select the OpenBot/android directory and click OK.
-- Confirm Gradle Sync if neccessary.
-- Connect your Android device and make sure USB Debugging in the [developer options](https://developer.android.com/studio/debug/dev-options) is enabled. Depending on your development environment [further steps](https://developer.android.com/studio/run/device) might be necessary.
-- Click the Run button (the green arrow) or select Run > Run 'android' from the top menu. You may need to rebuild the project using Build > Rebuild Project.
-- If it asks you to use Instant Run, click *Proceed Without Instant Run*.
+In case you are using the apk from the assets of the [latest release](https://github.com/intel-isl/OpenBot/releases/latest), you can skip the below steps and instead just [install](https://www.lifewire.com/install-apk-on-android-4177185) it on your phone directly. Note that that apk is signed with a debug key. If you would like to make changes to the app later, follow these steps to compile the app and deploy it on your phone:
+
+1. Open Android Studio and select *Open an existing Android Studio project*.
+2. Select the OpenBot/android directory and click OK.
+3. Confirm Gradle Sync if neccessary. To perform a Gradle Sync manually, click on the gradle icon.
+    ![Gradle Sync](../docs/images/android_studio_bar_gradle.jpg)
+4. Connect your Android device and make sure USB Debugging in the [developer options](https://developer.android.com/studio/debug/dev-options) is enabled. Depending on your development environment [further steps](https://developer.android.com/studio/run/device) might be necessary. You should see your device in the navigation bar at the top now.
+  ![Phone](../docs/images/android_studio_bar_phone.jpg)
+5. Click the Run button (the green arrow) or select Run > Run 'android' from the top menu. You may need to rebuild the project using Build > Rebuild Project.
+  ![Run](../docs/images/android_studio_bar_run.jpg)
+6. If it asks you to use Instant Run, click *Proceed Without Instant Run*.
 
 ### Code Structure
 
@@ -48,9 +65,9 @@ The drop-down menu is used to set the baud rate. The default is 115200 and you s
 
 There are three different drive modes when using a game controller (e.g. PS4):
 
-- **Game Mode**: Use the right and left shoulder triggers (R2, L2) for forward and reverse throttle and either joystick for steering. This mode imitates the control mode of car racing video games. 
+- **Game Mode**: Use the right and left shoulder triggers (R2, L2) for forward and reverse throttle and either joystick for steering. This mode imitates the control mode of car racing video games.
 - **Joystick**: Use either one of the joysticks to control the robot.
-- **Dual**: Use the left and right joystick to control the left and right side of the car. This is raw differential steering. 
+- **Dual**: Use the left and right joystick to control the left and right side of the car. This is raw differential steering.
 
 The switch on the right is used to toggle the control between a game controller and the network. On the game controller this switch can be toggled with the R1 trigger button. 
 
